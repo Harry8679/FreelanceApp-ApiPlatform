@@ -24,10 +24,12 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
-        $chrono = 1;
-
+        
         for ($u = 0; $u < 10; $u++) {
             $user = new User();
+            
+            $chrono = 1;
+            
             $hash = $this->encoder->hashPassword($user, 'Azerty123');
             $user->setFirstName($faker->firstName)
                  ->setLastName($faker->lastName)
