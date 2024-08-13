@@ -33,6 +33,9 @@ class Customer
     #[ORM\OneToMany(targetEntity: Invoice::class, mappedBy: 'customer')]
     private Collection $invoices;
 
+    #[ORM\ManyToOne(inversedBy: 'customers')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->invoices = new ArrayCollection();
@@ -117,6 +120,18 @@ class Customer
                 $invoice->setCustomer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
